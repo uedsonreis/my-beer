@@ -15,8 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "beers")
-public class Beer implements AbstractEntity<Long> {
+@Table(name = "manufacturers")
+public class Manufacturer implements AbstractEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +31,6 @@ public class Beer implements AbstractEntity<Long> {
     private Date modified;
 
     private String name;
-    private String type;
-    private String manufacturer;
     private String description;
-    private Integer ibu;
-    private Float abv;
 
 }
