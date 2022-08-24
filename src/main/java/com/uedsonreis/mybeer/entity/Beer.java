@@ -32,7 +32,7 @@ public class Beer implements AbstractEntity<Long> {
 
     private String name;
     private String type;
-    private String manufacturer;
+    private Long id_manufacturer;
     private String description;
     private Integer ibu;
     private Float abv;
