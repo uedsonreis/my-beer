@@ -3,7 +3,9 @@ package com.uedsonreis.mybeer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "io.github.uedsonreis.*"
+})
 public class MyBeerApplication {
 
     public static void main(String[] args) {
