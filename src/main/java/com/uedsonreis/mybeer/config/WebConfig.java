@@ -1,6 +1,9 @@
 package com.uedsonreis.mybeer.config;
 
 import com.uedsonreis.mybeer.service.UserService;
+import io.github.uedsonreis.libwscrud.api.config.security.AbstractWebConfig;
+import io.github.uedsonreis.libwscrud.api.config.security.RequestFilter;
+import io.github.uedsonreis.libwscrud.api.config.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,33 +22,20 @@ import javax.annotation.Resource;
 
 @Configuration
 @EnableWebSecurity
-public class WebConfig extends WebSecurityConfigurerAdapter {
-
-    private final UserService userService;
-    private final TokenManager tokenManager;
-    private final RequestFilter requestFilter;
+public class WebConfig extends AbstractWebConfig {
 
     public WebConfig(UserService userService, TokenManager tokenManager, RequestFilter requestFilter) {
-        this.userService = userService;
-        this.tokenManager = tokenManager;
-        this.requestFilter = requestFilter;
+        super(userService, tokenManager, requestFilter);
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(this.userService);
+    @Override
+    protected String[] getPermitedURLs() {
+        return new String[] { "/login", "/v1/users" };
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .cors().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests().antMatchers("/login", "/v1/users").permitAll()
-                .anyRequest().authenticated();
-
-        http.addFilterBefore(this.requestFilter, UsernamePasswordAuthenticationFilter.class);
+        super.configure(http);
         http.addFilter(new AuthenticationFilter(this.tokenManager, authenticationManagerBean()));
     }
 
