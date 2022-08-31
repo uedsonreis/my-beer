@@ -32,9 +32,12 @@ public class Beer implements AbstractEntity<Long> {
 
     private String name;
     private String type;
-    private Long id_manufacturer;
     private String description;
     private Integer ibu;
     private Float abv;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_manufacturer", nullable = false)
+    private Manufacturer manufacturer;
 
 }
