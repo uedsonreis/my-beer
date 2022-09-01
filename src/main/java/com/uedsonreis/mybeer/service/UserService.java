@@ -17,7 +17,6 @@ public class UserService implements UserDetailsService {
             .id(1l)
             .username("uedsonreis")
             .password(this.passwordEncoder().encode("123456"))
-            .valid(true)
             .build();
 
     public UserService() {

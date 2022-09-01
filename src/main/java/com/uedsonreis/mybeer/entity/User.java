@@ -17,7 +17,8 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    private Boolean valid;
+    @Builder.Default
+    private Boolean valid = true;
 
     @Builder.Default
     private Collection<GrantedAuthority> authorities = new ArrayList<>();

@@ -30,7 +30,7 @@ public class WebConfig extends AbstractWebConfig {
 
     @Override
     protected String[] getPermitedURLs() {
-        return new String[] { "/login", "/v1/users" };
+        return new String[] { "/swagger-ui/**", "/login" };
     }
 
     @Override

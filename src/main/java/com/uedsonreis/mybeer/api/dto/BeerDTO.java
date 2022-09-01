@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -15,8 +16,8 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "Manufacturer")
-public class ManufacturerDTO implements AbstractEntityDTO<Long> {
+@ApiModel(value = "Beer")
+public class BeerDTO implements AbstractEntityDTO<Long> {
 
     private Long id;
     private Boolean valid;
@@ -26,5 +27,13 @@ public class ManufacturerDTO implements AbstractEntityDTO<Long> {
 
     @NotEmpty
     private String name;
+
+    private String type;
     private String description;
+    private Integer ibu;
+    private Float abv;
+
+    @NotNull
+    private ManufacturerDTO manufacturer;
+
 }
