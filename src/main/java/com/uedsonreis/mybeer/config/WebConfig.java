@@ -19,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
+import java.util.Set;
 
 @Configuration
 @EnableWebSecurity
@@ -29,8 +31,10 @@ public class WebConfig extends AbstractWebConfig {
     }
 
     @Override
-    protected String[] getPermitedURLs() {
-        return new String[] { "/swagger-ui/**", "/login" };
+    protected Set<String> getPermitedURLs() {
+        Set<String> permited = new HashSet<>();
+        permited.add("/login");
+        return permited;
     }
 
     @Override

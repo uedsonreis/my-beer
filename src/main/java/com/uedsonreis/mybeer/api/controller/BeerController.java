@@ -5,6 +5,8 @@ import com.uedsonreis.mybeer.entity.Beer;
 import com.uedsonreis.mybeer.service.BeerService;
 import io.github.uedsonreis.libwscrud.api.controller.AbstractController;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
@@ -32,9 +34,6 @@ public class BeerController extends AbstractController<Beer, BeerDTO, Long> {
     }
 
     @Override
-    protected BeerDTO parserTO(Beer beer) {
-        return this.parserDTO(beer);
-    }
     protected BeerDTO parserDTO(Beer beer) {
         return this.parser(beer, BeerDTO.class);
     }
@@ -52,16 +51,6 @@ public class BeerController extends AbstractController<Beer, BeerDTO, Long> {
     @Override
     protected Page<BeerDTO> parserPageDTO(Page<Beer> page) {
         return this.mapper.mapPage(page, BeerDTO.class);
-    }
-
-    @PreAuthorize("isAuthenticated()")
-    @PostMapping(
-            path = "/test",
-            produces = {"application/json"}
-    )
-    public BeerDTO store(@RequestBody @Valid BeerDTO dto, @RequestHeader RequestHeader header) throws Exception {
-
-        return super.store(dto);
     }
 
 }

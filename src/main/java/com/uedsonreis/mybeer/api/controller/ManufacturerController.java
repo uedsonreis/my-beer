@@ -27,9 +27,6 @@ public class ManufacturerController extends AbstractController<Manufacturer, Man
     }
 
     @Override
-    protected ManufacturerDTO parserTO(Manufacturer manufacturer) {
-        return this.parserDTO(manufacturer);
-    }
     protected ManufacturerDTO parserDTO(Manufacturer manufacturer) {
         return this.parser(manufacturer, ManufacturerDTO.class);
     }
